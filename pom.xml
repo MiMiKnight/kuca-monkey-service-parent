@@ -45,10 +45,6 @@
 
     <!--构建管理-->
     <build>
-        <!--插件版本管理-->
-        <pluginManagement>
-
-        </pluginManagement>
         <!--引入插件-->
         <plugins>
             <!--maven-enforcer-plugin-->
@@ -115,6 +111,7 @@
                     </filesets>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 
