@@ -1,0 +1,16 @@
+### Project ###
+HELP.md
+target/
+.build/
+
+### Git ###
+*.orig
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
+### VS Code ###
+.vscode/

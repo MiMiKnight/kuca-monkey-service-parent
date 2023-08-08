@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--父工程-->
+    <parent>
+        <groupId>com.github.mimiknight.kuca</groupId>
+        <artifactId>kuca-parent-spring-boot-starter</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <!--本工程-->
+    <groupId>com.github.mimiknight</groupId>
+    <artifactId>kuca-monkey-service-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>parent</name>
+    <description>父项目</description>
+
+    <!--子模块管理-->
+    <modules>
+        <module>service</module>
+        <module>deployment</module>
+    </modules>
+
+    <!--版本管理-->
+    <properties>
+        <!--构建时项目名称-->
+        <project.build.name>kuca-monkey-service</project.build.name>
+        <!--构建打包时间戳格式-->
+        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+        <!--项目编码-->
+        <project.encoding>UTF-8</project.encoding>
+        <!--Maven 最低运行版本-->
+        <maven.version>3.8.0</maven.version>
+        <!--OpenJDK 最低运行版本-->
+        <jdk.version>17.0.2</jdk.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!--构建管理-->
+    <build>
+        <!--插件版本管理-->
+        <pluginManagement>
+
+        </pluginManagement>
+        <!--引入插件-->
+        <plugins>
+            <!--maven-enforcer-plugin-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!--规则检查不通过就构建失败;默认值:false-->
+                    <failFast>true</failFast>
+                    <rules>
+                        <requireMavenVersion>
+                            <version>${maven.version}</version>
+                        </requireMavenVersion>
+                        <requireJavaVersion>
+                            <version>${jdk.version}</version>
+                        </requireJavaVersion>
+                    </rules>
+                </configuration>
+            </plugin>
+            <!--maven-compiler-plugin-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <!-- 源代码使用的JDK版本 -->
+                    <source>${maven.compiler.source}</source>
+                    <!-- 需要生成的目标class文件的编译版本 -->
+                    <target>${maven.compiler.target}</target>
+                    <!--测试源码使用的Java版本-->
+                    <testSource>${maven.compiler.source}</testSource>
+                    <!--测试目标文件Java版本-->
+                    <testTarget>${maven.compiler.target}</testTarget>
+                    <!--字符集编码-->
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <!--编译时编译器版本-->
+                    <compilerVersion>${maven.compiler.source}</compilerVersion>
+                    <!--显示告警-->
+                    <showWarnings>true</showWarnings>
+                    <compilerArgs>
+                        <!--启用所有推荐的警告-->
+                        <arg>-Xlint:all</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <!--maven-clean-plugin-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <!--要清理的目录-->
+                            <directory>${project.basedir}/.build</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

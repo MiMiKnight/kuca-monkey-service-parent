@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--父项目-->
+    <parent>
+        <artifactId>kuca-monkey-service-parent</artifactId>
+        <groupId>com.github.mimiknight</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <!--本工程-->
+    <artifactId>kuca-monkey-service-deployment</artifactId>
+    <packaging>pom</packaging>
+    <name>deployment</name>
+    <description>部署模块</description>
+
+    <!--版本管理-->
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!--引入依赖-->
+    <dependencies>
+        <dependency>
+            <groupId>com.github.mimiknight</groupId>
+            <artifactId>kuca-monkey-service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <!--构建管理-->
+    <build>
+        <plugins>
+            <!--maven-assembly-plugin-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <!-- 将组装绑定到maven生命周期的哪一阶段 -->
+                        <phase>package</phase>
+                        <goals>
+                            <!-- 指定assembly插件的打包方式-->
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- 压缩包名 -->
+                    <finalName>${project.build.name}-${maven.build.timestamp}</finalName>
+                    <!-- 打包后的压缩包位置 -->
+                    <outputDirectory>${project.parent.basedir}/.build</outputDirectory>
+                    <descriptors>
+                        <!-- 描述文件路径 -->
+                        <descriptor>${project.basedir}/assembly.xml</descriptor>
+                    </descriptors>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
